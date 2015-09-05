@@ -1,3 +1,18 @@
+;;; transparent.el ---  -*- lexical-binding: t; -*-                               
+
+(defun toggle-transparency ()
+  "Toggle between transparent or opaque display."
+  (interactive)
+  ;; Define alpha if it's nil
+  (if (eq (frame-parameter (selected-frame) 'alpha) nil)
+      (set-frame-parameter (selected-frame) 'alpha '(100 100)))
+  ;; Do the actual toggle
+  (if (/= (cadr (frame-parameter (selected-frame) 'alpha)) 100)
+      (set-frame-parameter (selected-frame) 'alpha '(100 100))
+    (set-frame-parameter (selected-frame) 'alpha
+                         (list dotspacemacs-active-transparency
+                               dotspacemacs-inactive-transparency))))
+
 (defun toggle-transparency ()
   (interactive)
   (if (/=
